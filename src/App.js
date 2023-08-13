@@ -1,10 +1,11 @@
-import {  useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import PostList1 from "./PostList1";
 import PostList2 from "./PostList2";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
 import AddPost from "./AddPost";
+import PostListPagination from "./PostListPagination";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(<PostList1 />);
@@ -26,14 +27,20 @@ function App() {
             <button onClick={() => setCurrentPage(<Post id={1} />)}>
               first post{" "}
             </button>
-            <button onClick={() => setCurrentPage(<CreatePost />)}>
+            <button
+              onClick={() =>
+                setCurrentPage(<CreatePost setCurrentPage={setCurrentPage} />)
+              }
+            >
               New Post
+            </button>
+            <button onClick={() => setCurrentPage(<PostListPagination />)}>
+              Post List Pagination
             </button>
           </div>
           {currentPage}
         </div>
       </div>
-
     </div>
   );
 }
